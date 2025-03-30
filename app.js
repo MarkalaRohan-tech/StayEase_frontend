@@ -9,15 +9,15 @@ const ejsMate = require("ejs-mate");
 const MONGO_URL = "mongodb://127.0.0.1:27017/stayease";
 
 main()
-    .then(() => {
-        console.log("Connected to StayEase DB");
-    })
-    .catch((e) => {
-        console.log("Error:", e)
-    });
+  .then(() => {
+    console.log("Connected to StayEase DB");
+  })
+  .catch((e) => {
+    console.log("Error:", e);
+  });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
@@ -28,9 +28,8 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/", (req, res) => {
-    res.render("listings/home.ejs");
+  res.render("listings/home.ejs");
 });
-
 
 // app.get("/listings", async(req, res) => {
 //     let allListings = await Listing.find({});
@@ -38,22 +37,22 @@ app.get("/", (req, res) => {
 // });
 
 app.get("/listings", async (req, res) => {
-  let { country, price } = req.query; 
+  let { country, price } = req.query;
 
-  let filters = {}; 
+  let filters = {};
 
   if (country && country !== "") {
-    filters.country = country; 
+    filters.country = country;
   }
 
   if (price && !isNaN(price)) {
-    filters.price = { $lte: Number(price) }; 
+    filters.price = { $lte: Number(price) };
   }
 
-  console.log("Filters Applied:", filters); 
+  console.log("Filters Applied:", filters);
 
   try {
-    let allListings = await Listing.find(filters); 
+    let allListings = await Listing.find(filters);
     res.render("listings/index.ejs", { allListings });
   } catch (err) {
     console.error(err);
@@ -61,41 +60,41 @@ app.get("/listings", async (req, res) => {
   }
 });
 
-
 app.get("/listings/new", (req, res) => {
   res.render("listings/form.ejs");
 });
 
 app.post("/listings", async (req, res) => {
-    let newListing = new Listing(req.body.Listing);
-    newListing.save();
-    res.redirect("/listings");
+  let newListing = new Listing(req.body.Listing);
+  newListing.save();
+  res.redirect("/listings");
 });
 
 app.get("/listings/:id/edit", async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    res.render("listings/edit.ejs", { listing });
+  let { id } = req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/edit.ejs", { listing });
 });
 
 app.get("/listings/:id", async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    res.render("listings/show.ejs", { listing });
+  let { id } = req.params;
+  const listing = await Listing.findById(id);
+  res.render("listings/show.ejs", { listing });
 });
 
 app.put("/listings/:id", async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.Listing});
-    res.redirect(`/listings/${id}`);
+  let { id } = req.params;
+  await Listing.findByIdAndUpdate(id, { ...req.body.Listing });
+  res.redirect(`/listings/${id}`);
 });
 
 app.delete("/listings/:id", async (req, res) => {
-    let {id} = req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect("/listings");
-})
+  let { id } = req.params;
+  await Listing.findByIdAndDelete(id);
+  res.redirect("/listings");
+});
 
+const port = process.env.PORT || 3000;
 app.listen(3000, () => {
-    console.log("Server is listening to port 3000");
+  console.log("Server is listening to port 3000");
 });
