@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+  <br>
+  <div class="row">
+    <h1 class="heading col-8">All Listings</h1>
+    <button class="btn btn-warning filter col-md-4" id="openFilter">
+      <img src="/images/filter.png" width="20px" height="18px"><b> Filter</b>
+    </button>
+  </div>
+  <br>
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+    <%for(let listing of allListings){%>
+      <a href="/listings/<%=listing._id%>" class="listing-link">
+        <div class="card block">
+          <img src="<%=listing.image%>" class="card-img-top" alt="listing-image" style="height: 20rem;">
+          <div class="card-img-overlay"></div>
+          <div class="card-body">
+            <p class="card-text">
+              <b><%= listing.title%></b>
+              <br>
+              <%= listing.location%>
+              <br>
+              <%= listing.country%>
+              <br>
+              <b>&#8377; <%=listing.price.toLocaleString("en-IN")%>/night</b>
+              <br>
+            </p>
+          </div>
+        </div>
+      </a>
+    <%}%>
+  </div>
+
+  <!-- Filter Popup Modal -->
+  <div class="overlay" id="filterOverlay">
+    <div class="filter-popup">
+      <span class="close-btn" id="closeFilter">&times;</span>
+      <h2>Filters</h2>
+      <div class="applyFil">
+      <label for="country">Select Country:</label>
+      <br>
+      <select id="country">
+        <option value="">Any</option>
+        <option value="India">India</option>
+        <option value="United States">United States</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Italy">Italy</option>
+        <option value="Netherlands">Netherlands</option>
+        <option value="Tanzania">Tanzania</option>
+        <option value="Switzerland">Switzerland</option>
+        <option value="Fiji">Fiji</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Canada">Canada</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Thailand">Thailand</option>
+        <option value="United Arab Emirates">United Arab Emirates</option>
+        <option value="Costa Rica">Costa Rica</option>
+        <option value="Greece">Greece</option>
+        <option value="Japan">Japan</option>
+        <option value="Maldives">Maldives</option>
+      </select>
+      <br><br>
+      <label for="priceRange">Price Range:</label>
+      <br>
+      500
+      <input type="range" id="priceRange" min="500" max="15000" step="1000">
+      15000
+      </div>
+      <br>
+      <button class="btn btn-warning" id="applyFilters">Apply Filters</button>
+    </div>
+  </div>
+</body>

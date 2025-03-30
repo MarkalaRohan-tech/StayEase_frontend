@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+    <h1>New Form:</h1>
+    <div class="card border-warning p-5 m-5">
+    <form action="/listings" method="post">
+        <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <br>
+        <input type="text" class="form-control" name="Listing[title]" placeholder="Add a catchy title">
+        </div>
+        <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <br>
+        <textarea class="form-control"  name="Listing[description]" placeholder="Describe your place"></textarea>
+        </div>
+        <div class="mb-3">
+        <label for="image" class="form-label">Image Url:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[image]" placeholder="Place image url here">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+        <br>
+        <input class="form-control" type="number" name="Listing[price]" placeholder="2100">
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-8">
+        <label for="location" class="form-label">Location:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[location]" placeholder="Hyderabad, Telangana">
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="country" class="form-label">Country:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[country]" placeholder="India">
+        </div>
+        </div>
+        <br>
+        <button class="btn btn-warning">Submit</button>
+    </form>
+    </div>
+</body>

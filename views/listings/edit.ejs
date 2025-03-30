@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+    <h1>Edit Form:</h1>
+    <div class="card border-warning p-5 m-5">
+    <form action="/listings/<%=listing._id%>?_method=PUT" method="post">
+        <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[title]" value="<%= listing.title%>">
+        </div>
+        <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <br>
+        <textarea class="form-control" name="Listing[description]"> <%= listing.description%></textarea>
+        </div>
+        <div class="mb-3">
+        <label for="image" class="form-label">Image Url:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[image]" value="<%= listing.image%>">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+        <br>
+        <input class="form-control" type="number" name="Listing[price]" value="<%= listing.price%>">
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-8">
+        <label for="location" class="form-label">Location:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[location]" value="<%= listing.location%>">
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="country" class="form-label">Country:</label>
+        <br>
+        <input class="form-control" type="text" name="Listing[country]" value="<%= listing.country%>">
+        </div>
+        </div>
+        <br>
+        <button class="btn btn-warning">Submit</button>
+        </div>
+    </form>
+</body>
